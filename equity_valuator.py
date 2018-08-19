@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import logging
-import pandas
 
 import equity_data
 
@@ -9,7 +8,7 @@ logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 
-def get_ggm_price(equity_code):
+def get_ggm_price(equity_code, report_period, required_return):
     """
     Gordon Growth Model (GGM). It is a special case of Dividend Discount Model (DDM).
     
@@ -21,12 +20,23 @@ def get_ggm_price(equity_code):
         g: growth rate
         r: required return
     """
+    d0 = equity_data.get_dividend_per_share(equity_code, report_period)
+    g = get_growth_rate(equity_code, report_period)
+    r = required_return
+    price = d0 * (1 + g) / (r - g)
+    return price
 
     
-def get_growth_rate(equity_code):
+def get_growth_rate(equity_code, report_period):
     """
     growth rate = ROE * retention ratio
     """
+    roe = get_roe(equity_code, report_period)
+    retention_ratio = equity_data.get_retention_ratio(equity_code, report_period)
+    growth_rate = roe * retention_ratio
+    
+    logger.debug('growth_rate=%s', growth_rate)
+    return growth_rate
 
 
 def get_roe(equity_code, report_period):
@@ -46,4 +56,5 @@ def get_roa(equity_code, report_period):
 
 
 if __name__ == '__main__':
-    print(get_roa('000876.SZ', '2017-12'))
+    print(get_ggm_price('000876.SZ', '20171231', 0.1))
+    print(get_ggm_price('000625.SZ', '20171231', 0.1))
