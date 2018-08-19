@@ -10,13 +10,14 @@ df = ts.get_k_data('399006', index=True, start='2018-08-01', end='2018-08-16')
 fig, ax1 = plt.subplots()
 color = 'tab:red'
 ax1.set_xlabel('date')
-ax1.set_ylabel('volume')
-ax1.plot(df['date'], df['volume'])
+ax1.set_ylabel('volume', color=color)
+ax1.plot(df['date'], df['volume'], color=color)
 ax1.tick_params(axis='y', labelcolor=color)
 
 ax2 = ax1.twinx()
+color = 'tab:blue'
 ax2.set_ylabel('close', color=color)
-ax2.plot(df['date'], df['close'])
+ax2.plot(df['date'], df['close'], color=color)
 ax2.tick_params(axis='y', labelcolor=color)
 
 fig.tight_layout()
