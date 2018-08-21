@@ -46,6 +46,15 @@ def get_growth_rate(equity_code, report_period):
     logger.debug('growth_rate=%s', growth_rate)
     return growth_rate
 
+def get_dividend_growth_rate(equity_code, report_period):
+    """
+    TODO: Geometric mean of the dividend growth in each year
+    """
+
+def validate_dividend_growth_rate():
+    """
+    TODO: The dividend growth rate should not be much far away from GDP growth rate
+    """
 
 def get_roe(equity_code, report_period):
     net_income = equity_data.get_net_income(equity_code, report_period)
