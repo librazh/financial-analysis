@@ -89,6 +89,10 @@ def get_retention_ratio_from_balance_sheet(equity_code, report_period):
     logger.debug('retention_ratio=%s', retention_ratio)
     return retention_ratio
 
+def get_gdp(report_period):
+    """
+    TODO: Get GDP data
+    """
 
 if __name__ == '__main__':
     print(get_dividend_per_share('000876.SZ', '20171231'))
