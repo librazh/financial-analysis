@@ -8,7 +8,7 @@ import logging
 import os
 
 from pandas import Period
-import pandas
+import pandas as pd
 
 import my_tushare
 
@@ -61,7 +61,7 @@ def get_retained_earning(equity_code, report_period):
 def get_retention_ratio(equity_code, report_period):
     logger.debug('equity_code=%s, report_period=%s', equity_code, report_period)
     
-    equity_data = pandas.read_excel(os.path.join(dividend_dir, equity_code + '.xlsx'))
+    equity_data = pd.read_excel(os.path.join(dividend_dir, equity_code + '.xlsx'))
     equity_data = equity_data.loc[equity_data[u'年度'] == str(Period(report_period).end_time.date()), [u'收益留存率']]
     
     retention_ratio = equity_data.iloc[0][0]
@@ -72,7 +72,7 @@ def get_retention_ratio(equity_code, report_period):
 def get_dividend_per_share(equity_code, report_period):
     logger.debug('equity_code=%s, report_period=%s', equity_code, report_period)
     
-    equity_data = pandas.read_excel(os.path.join(dividend_dir, equity_code + '.xlsx'))
+    equity_data = pd.read_excel(os.path.join(dividend_dir, equity_code + '.xlsx'))
     equity_data = equity_data.loc[equity_data[u'年度'] == str(Period(report_period).end_time.date()), [u'每股股利(元)']]
     
     dividend_per_share = equity_data.iloc[0][0]
@@ -83,7 +83,7 @@ def get_dividend_per_share(equity_code, report_period):
 
 def get_retention_ratio_from_balance_sheet(equity_code, report_period):
     
-    periods = pandas.period_range(end=report_period, freq='Y', periods=2).end_time.strftime('%Y%m%d')
+    periods = pd.period_range(end=report_period, freq='Y', periods=2).end_time.strftime('%Y%m%d')
     logger.debug('periods=%s', periods)
     
     retained_earning_0 = get_retained_earning(equity_code, periods[0])
