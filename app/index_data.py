@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-TODO: Track and forecast 创业板指数 (399006)
+TODO: Track and forecast indexes
 """
-import tushare as ts
+import my_tushare
 import matplotlib.pyplot as plt
 
-ts.set_token('6637031d14f4036a8dfffe9b186ff41164ddc1d2c9f6c5b521aaa56f')
+ts = my_tushare.init_tushare()
 
 df = ts.get_k_data('399006', index=True, start='2018-08-01', end='2018-08-16')
 
@@ -30,6 +30,3 @@ fig.tight_layout()
 #plt.xlabel('date')
 
 plt.show()
-
-
-

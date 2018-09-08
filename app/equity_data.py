@@ -9,13 +9,13 @@ import logging
 from pandas import Period
 import pandas
 
-import tushare as ts
+import my_tushare
 
 
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
-ts.set_token('6637031d14f4036a8dfffe9b186ff41164ddc1d2c9f6c5b521aaa56f')
+ts = my_tushare.init_tushare()
 pro = ts.pro_api()
 
 
