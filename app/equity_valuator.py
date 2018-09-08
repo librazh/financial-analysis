@@ -2,7 +2,7 @@
 
 import logging
 
-import equity_data
+import ed
 
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
@@ -28,7 +28,7 @@ def get_ggm_price(equity_code, report_period, required_return):
         g: growth rate
         r: required return
     """
-    d0 = equity_data.get_dividend_per_share(equity_code, report_period)
+    d0 = ed.get_dividend_per_share(equity_code, report_period)
     g = get_growth_rate(equity_code, report_period)
     r = required_return
     price = d0 * (1 + g) / (r - g)
@@ -40,7 +40,7 @@ def get_growth_rate(equity_code, report_period):
     growth rate = ROE * retention ratio
     """
     roe = get_roe(equity_code, report_period)
-    retention_ratio = equity_data.get_retention_ratio(equity_code, report_period)
+    retention_ratio = ed.get_retention_ratio(equity_code, report_period)
     growth_rate = roe * retention_ratio
     
     logger.debug('growth_rate=%s', growth_rate)
@@ -57,16 +57,16 @@ def validate_dividend_growth_rate():
     """
 
 def get_roe(equity_code, report_period):
-    net_income = equity_data.get_net_income(equity_code, report_period)
-    total_equity = equity_data.get_total_equity(equity_code, report_period)
+    net_income = ed.get_net_income(equity_code, report_period)
+    total_equity = ed.get_total_equity(equity_code, report_period)
     roe = net_income / total_equity
     logger.debug('roe=%s', roe)
     return roe
 
 
 def get_roa(equity_code, report_period):
-    net_income = equity_data.get_net_income(equity_code, report_period)
-    total_asset = equity_data.get_total_asset(equity_code, report_period)
+    net_income = ed.get_net_income(equity_code, report_period)
+    total_asset = ed.get_total_asset(equity_code, report_period)
     roa = net_income / total_asset
     logger.debug('roa=%s', roa)
     return roa
