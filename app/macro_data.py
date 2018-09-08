@@ -37,7 +37,7 @@ def get_deposit_rate(deposit_type, report_period=None):
     for record in df.values:
         rate_date = Period(record[0])
         if rate_date <= report_period and record[1] != '--':
-            deposit_rate = float(record[1])
+            deposit_rate = float(record[1]) / 100
 
     logger.debug('deposit_rate=%f', deposit_rate)
     return deposit_rate
