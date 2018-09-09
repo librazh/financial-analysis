@@ -12,7 +12,7 @@ class TestMacroData(unittest.TestCase):
 
 
     def test_get_deposit_rate(self):
-        assert md.get_deposit_rate('定期存款整存整取(五年)', '20110407') == 5.25
+        assert md.get_deposit_rate('定期存款整存整取(五年)', '20110407') == 0.0525
 
 
 if __name__ == "__main__":

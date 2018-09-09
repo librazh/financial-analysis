@@ -5,7 +5,7 @@ TODO: Track and forecast indexes
 import my_tushare
 import matplotlib.pyplot as plt
 
-ts = my_tushare.init_tushare()
+ts = my_tushare.get_tushare()
 
 def demo(index_code):
     df = ts.get_k_data(index_code, index=True, start='2018-08-01', end='2018-08-16')

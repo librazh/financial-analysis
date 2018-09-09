@@ -16,7 +16,7 @@ import my_tushare
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
-ts = my_tushare.init_tushare()
+ts = my_tushare.get_tushare()
 pro = ts.pro_api()
 
 dividend_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'data', 'dividend')

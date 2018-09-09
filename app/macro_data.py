@@ -1,16 +1,13 @@
 # -*- coding: utf-8 -*-
 
-import logging
-
 from pandas import Period
 
 import my_tushare
+import my_logging
 
+logger = my_logging.getLogger(__name__)
 
-logging.basicConfig(level=logging.DEBUG)
-logger = logging.getLogger(__name__)
-
-ts = my_tushare.init_tushare()
+ts = my_tushare.get_tushare()
 
 def get_gdp(report_period):
     """
