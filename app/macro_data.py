@@ -9,10 +9,12 @@ logger = my_logging.getLogger(__name__)
 
 ts = my_tushare.get_tushare()
 
+
 def get_gdp(report_period):
     """
     TODO: Get GDP data
     """
+
 
 def get_deposit_rate(deposit_type, report_period=None):
     
@@ -38,6 +40,7 @@ def get_deposit_rate(deposit_type, report_period=None):
 
     logger.debug('deposit_rate=%f', deposit_rate)
     return deposit_rate
+
 
 if __name__ == '__main__':
     print(get_deposit_rate('定期存款整存整取(五年)', '20110407'))

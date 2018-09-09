@@ -4,6 +4,10 @@ TODO: Track and forecast indexes
 """
 import my_tushare
 import matplotlib.pyplot as plt
+import my_logging
+
+
+logger = my_logging.getLogger(__name__)
 
 ts = my_tushare.get_tushare()
 

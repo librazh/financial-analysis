@@ -4,17 +4,15 @@ Note:
     * report_period: pandas.Period value
 """
 
-import logging
 import os
 
 from pandas import Period
 import pandas as pd
 
 import my_tushare
+import my_logging
 
-
-logging.basicConfig(level=logging.DEBUG)
-logger = logging.getLogger(__name__)
+logger = my_logging.getLogger(__name__)
 
 ts = my_tushare.get_tushare()
 pro = ts.pro_api()
@@ -68,6 +66,7 @@ def get_retention_ratio(equity_code, report_period):
     
     logger.debug('retention_ratio=%s', retention_ratio)
     return retention_ratio
+
 
 def get_dividend_per_share(equity_code, report_period):
     logger.debug('equity_code=%s, report_period=%s', equity_code, report_period)

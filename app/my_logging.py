@@ -17,15 +17,21 @@ DEFAULT_CONFIG = {
         },
     },
     'handlers': { 
-        'default': { 
+        'console': { 
             'level': 'DEBUG',
             'formatter': 'standard',
             'class': 'logging.StreamHandler',
         },
+        'file': { 
+            'level': 'DEBUG',
+            'formatter': 'standard',
+            'class': 'logging.FileHandler',
+            'filename': 'app.log',
+        },
     },
     'loggers': { 
         '': { 
-            'handlers': ['default'],
+            'handlers': ['console', 'file'],
             'level': 'DEBUG',
             'propagate': True
         },
@@ -36,19 +42,3 @@ DEFAULT_CONFIG = {
 def getLogger(name):
     logging.config.dictConfig(DEFAULT_CONFIG)
     return logging.getLogger(name)
-
-
-class Logger(logging.Logger):
-    '''
-    TODO add entry function for logging the entry parameters
-    '''
-
-    def entry(self, *args):
-        arg_dict = dict()
-        for arg in args:
-            arg_dict[arg.__name__] = arg
-    
-    def exit(self, *args):
-        arg_dict = dict()
-        for arg in args:
-            arg_dict[arg.__name__] = arg
