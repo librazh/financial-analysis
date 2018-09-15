@@ -5,7 +5,7 @@ from pandas import Period
 import my_tushare
 import my_logging
 
-logger = my_logging.getLogger(__name__)
+logger = my_logging.getLogger()
 
 ts = my_tushare.get_tushare()
 
@@ -41,6 +41,10 @@ def get_deposit_rate(deposit_type, report_period=None):
     logger.debug('deposit_rate=%f', deposit_rate)
     return deposit_rate
 
+def get_shibor():
+    df = ts.shibor_data()
+    return df
 
 if __name__ == '__main__':
-    print(get_deposit_rate('定期存款整存整取(五年)', '20110407'))
+    #print(get_deposit_rate('定期存款整存整取(五年)', '20110407'))
+    print(get_shibor())

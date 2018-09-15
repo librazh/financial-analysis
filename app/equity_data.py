@@ -12,7 +12,7 @@ import pandas as pd
 import my_tushare
 import my_logging
 
-logger = my_logging.getLogger(__name__)
+logger = my_logging.getLogger()
 
 ts = my_tushare.get_tushare()
 pro = ts.pro_api()

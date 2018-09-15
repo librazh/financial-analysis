@@ -13,7 +13,7 @@ DEFAULT_CONFIG = {
     'disable_existing_loggers': False,
     'formatters': { 
         'standard': { 
-            'format': '%(asctime)s [%(levelname)s] %(name)s.%(funcName)s (%(lineno)d): %(message)s'
+            'format': '%(asctime)s [%(levelname)s] %(name)s.%(module)s.%(funcName)s (%(lineno)d): %(message)s'
         },
     },
     'handlers': { 
@@ -39,6 +39,8 @@ DEFAULT_CONFIG = {
 }
 
 
-def getLogger(name):
+def getLogger(name=None):
     logging.config.dictConfig(DEFAULT_CONFIG)
+    if name is None:
+        name = 'financial-analysis'
     return logging.getLogger(name)

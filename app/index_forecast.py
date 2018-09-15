@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import my_logging
 
 
-logger = my_logging.getLogger(__name__)
+logger = my_logging.getLogger()
 
 ts = my_tushare.get_tushare()
 

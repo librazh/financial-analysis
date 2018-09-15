@@ -5,7 +5,7 @@ import macro_data as md
 
 import my_logging
 
-logger = my_logging.getLogger(__name__)
+logger = my_logging.getLogger()
 
 
 def get_spm_price(equity_code, report_period, required_return):
