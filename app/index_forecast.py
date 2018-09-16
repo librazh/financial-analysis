@@ -2,14 +2,14 @@
 """
 TODO: Track and forecast indexes
 """
-import my_tushare
 import matplotlib.pyplot as plt
-import my_logging
 
+from .my_logging import get_logger
+from .my_tushare import get_tushare
 
-logger = my_logging.getLogger()
+logger = get_logger()
+ts = get_tushare()
 
-ts = my_tushare.get_tushare()
 
 def demo(index_code):
     df = ts.get_k_data(index_code, index=True, start='2018-08-01', end='2018-08-16')
@@ -31,10 +31,11 @@ def demo(index_code):
     
     # plt.plot(df['date'], df['volume'], 'b-', df['date'], df['close'], 'r--')
     
-    #plt.ylabel('index')
-    #plt.xlabel('date')
+    # plt.ylabel('index')
+    # plt.xlabel('date')
     
     plt.show()
+
 
 if __name__ == '__main__':
     demo('399006')

@@ -9,12 +9,11 @@ import os
 from pandas import Period
 import pandas as pd
 
-import my_tushare
-import my_logging
+from .my_tushare import get_tushare
+from .my_logging import get_logger
 
-logger = my_logging.getLogger()
-
-ts = my_tushare.get_tushare()
+logger = get_logger()
+ts = get_tushare()
 pro = ts.pro_api()
 
 dividend_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'data', 'dividend')

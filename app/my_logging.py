@@ -39,7 +39,7 @@ DEFAULT_CONFIG = {
 }
 
 
-def getLogger(name=None):
+def get_logger(name=None):
     logging.config.dictConfig(DEFAULT_CONFIG)
     if name is None:
         name = 'financial-analysis'

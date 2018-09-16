@@ -2,12 +2,11 @@
 
 from pandas import Period
 
-import my_tushare
-import my_logging
+from .my_logging import get_logger
+from .my_tushare import get_tushare
 
-logger = my_logging.getLogger()
-
-ts = my_tushare.get_tushare()
+logger = get_logger()
+ts = get_tushare()
 
 
 def get_gdp(report_period):

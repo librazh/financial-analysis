@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
-import equity_data as ed
-import macro_data as md
+from . import equity_data as ed
+from . import macro_data as md
 
-import my_logging
+from .my_logging import get_logger
 
-logger = my_logging.getLogger()
+logger = get_logger()
 
 
 def get_spm_price(equity_code, report_period, required_return):

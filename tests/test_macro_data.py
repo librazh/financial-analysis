@@ -5,7 +5,7 @@ Created on 2018-09-08
 @author: Basel
 '''
 import unittest
-import macro_data as md
+import app.macro_data as md
 
 
 class TestMacroData(unittest.TestCase):
