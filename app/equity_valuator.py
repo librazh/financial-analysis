@@ -96,3 +96,19 @@ def get_roa(equity_code, report_period):
     roa = net_income / total_asset
     logger.debug('roa=%s', roa)
     return roa
+
+def get_capm(beta, rm):
+    '''
+    TODO:       
+    Capital Asset Pricing Model (CAPM)
+    capm = rf + beta(rm - rf)
+    
+    where
+        rf = Risk free rate
+        beta = market risk
+        rm = expected market return
+    '''
+    
+    rf = md.get_deposit_rate('定期存款整存整取(五年)')
+    capm = rf + beta * (rm - rf)
+    return capm
