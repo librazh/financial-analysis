@@ -8,18 +8,35 @@ from .my_logging import get_logger
 logger = get_logger()
 
 
-def get_spm_price(equity_code, report_period, required_return):
-    """
-    TODO:
-    
+def get_spm_price(equity_code, report_period, required_return=None):
+    '''
     Sum of Perpetuities Method (SPM)
     
-    P = E * G / K + D / K
-    """
+    P = E * G / K**2 + D / K
+    
+    where
+        P: price
+        E: EPS
+        G: growth rate
+        K: required return, discount rate
+        D: dividend per share
+    '''
+    
+    e = ed.get_net_income(equity_code, report_period) / ed.get_total_share(equity_code, report_period)
+    g = get_growth_rate(equity_code, report_period)
+    if required_return is None:
+        k = md.get_deposit_rate('定期存款整存整取(五年)')
+    else:
+        k = required_return
 
+    d =ed.get_dividend_per_share(equity_code, report_period) 
+
+    price = e * g / k**2 + d / k
+    
+    return price
 
 def get_ggm_price(equity_code, report_period, required_return=None):
-    """
+    '''
     Gordon Growth Model (GGM). It is a special case of Dividend Discount Model (DDM).
     
     P = D0 * (1 + g) / (r - g)
@@ -29,7 +46,7 @@ def get_ggm_price(equity_code, report_period, required_return=None):
         D0: dividend        
         g: growth rate
         r: required return
-    """
+    '''
     d0 = ed.get_dividend_per_share(equity_code, report_period)
     g = get_growth_rate(equity_code, report_period)
     
@@ -79,9 +96,3 @@ def get_roa(equity_code, report_period):
     roa = net_income / total_asset
     logger.debug('roa=%s', roa)
     return roa
-
-
-if __name__ == '__main__':
-    print(get_ggm_price('000876.SZ', '20171231', required_return=0.1))
-    print(get_ggm_price('000876.SZ', '20171231'))
-    print(get_ggm_price('000625.SZ', '20171231', required_return=0.11))
