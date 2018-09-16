@@ -5,6 +5,7 @@ Created on 2018-09-15
 @author: Basel
 '''
 import requests
+from instance import config
 
 
 def get_cny_usd():
@@ -13,8 +14,8 @@ def get_cny_usd():
         'curno': 'USD',
         'bankno': 'BOC',
         'date': '20161101',
-        'appkey': '36731',
-        'sign': '9e849408130673ef9d3a8039418c2b07',
+        'appkey': config.NOWAPI_APPKEY,
+        'sign': config.NOWAPI_SIGN,
         'format': 'json',
     }
     
