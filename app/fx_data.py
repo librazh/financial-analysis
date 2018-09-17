@@ -24,7 +24,7 @@ def get_cny_usd_boc():
     
     return r.json()
 
-def get_cny_usd_fred():
+def get_cny_usd_fred(start_date=None, end_date=None):
     quandl.ApiConfig.api_key = config.QUANDL_APPKEY
-    rates = quandl.get('FRED/DEXCHUS')
+    rates = quandl.get('FRED/DEXCHUS', start_date=start_date, end_date=end_date)
     return rates

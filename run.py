@@ -10,7 +10,7 @@ from app import fx_data as fx
 import matplotlib.pyplot as plt
 
 def plt_fx():
-    fx_rates = fx.get_cny_usd_fred()
+    fx_rates = fx.get_cny_usd_fred('2017-01-01', '2018-09-01')
     plt.plot(fx_rates.index, fx_rates['Value'])
     plt.show()
     
