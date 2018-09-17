@@ -5,10 +5,11 @@ Created on 2018-09-15
 @author: Basel
 '''
 import requests
+import quandl
 from instance import config
 
 
-def get_cny_usd():
+def get_cny_usd_boc():
     payload = {
         'app': 'finance.rate_cnyquot_history',
         'curno': 'USD',
@@ -23,6 +24,7 @@ def get_cny_usd():
     
     return r.json()
 
-if __name__ == '__main__':
-    
-    print(get_cny_usd()['result']['lists'][0]['middle'])
+def get_cny_usd_fred():
+    quandl.ApiConfig.api_key = config.QUANDL_APPKEY
+    rates = quandl.get('FRED/DEXCHUS')
+    return rates

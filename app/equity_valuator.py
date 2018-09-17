@@ -97,18 +97,27 @@ def get_roa(equity_code, report_period):
     logger.debug('roa=%s', roa)
     return roa
 
-def get_capm(beta, rm):
+def get_rrr_capm(beta=None, rm=None):
     '''
     TODO:       
-    Capital Asset Pricing Model (CAPM)
-    capm = rf + beta(rm - rf)
+    Get required rate of return by Capital Asset Pricing Model (CAPM)
+    rrr = rf + beta(rm - rf)
     
     where
-        rf = Risk free rate
-        beta = market risk
-        rm = expected market return
+        rrr: required rate of return
+        rf: Risk free rate
+        beta: market risk
+        rm: expected market return
     '''
     
     rf = md.get_deposit_rate('定期存款整存整取(五年)')
     capm = rf + beta * (rm - rf)
     return capm
+
+def get_rrr_wacc():
+    '''
+    TODO:
+    Get required rate of return using Weighted Average Cost of Capital (WACC)
+    
+    '''
+    
