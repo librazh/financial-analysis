@@ -101,7 +101,7 @@ def get_rrr_capm(beta=None, rm=None):
     '''
     TODO:       
     Get required rate of return by Capital Asset Pricing Model (CAPM)
-    rrr = rf + beta(rm - rf)
+    rrr from CAPM = rf + beta(rm - rf)
     
     where
         rrr: required rate of return
@@ -109,15 +109,45 @@ def get_rrr_capm(beta=None, rm=None):
         beta: market risk
         rm: expected market return
     '''
+    logger.debug('beta=%s, rm=%s', beta, rm)
     
     rf = md.get_deposit_rate('定期存款整存整取(五年)')
-    capm = rf + beta * (rm - rf)
-    return capm
+    
+    if beta is None:
+        beta = 1
+    if rm is None:
+        rm = 0.1
+    
+    rrr_from_capm = rf + beta * (rm - rf)
+    
+    logger.debug('rrr_from_capm=%s', rrr_from_capm)
+    return rrr_from_capm
 
-def get_rrr_wacc():
+def get_rrr_wacc(equity_code, report_period):
     '''
     TODO:
     Get required rate of return using Weighted Average Cost of Capital (WACC)
-    
+    rrr from WACC = (total equity / total asset) * cost of equity + (total debt / total asset) * cost of debt * (1 - tax rate)
     '''
+    
+    logger.debug('equity_code=%s, report_period=%s', equity_code, report_period)
+    
+    total_asset = ed.get_total_asset(equity_code, report_period)
+    total_equity = ed.get_total_equity(equity_code, report_period)
+    total_debt = ed.get_total_debt(equity_code, report_period)
+    
+    # Tax rate in China is average 40%
+    tax_rate = 0.4
+    
+    # TODO: Calculate cost of debt of the company. Here is using loan rate.
+    cost_of_debt = md.get_loan_rate('中长期贷款(五年以上)', report_period)
+    
+    # TODO:Calculate cost of equity. Here is using dividend ratio.
+    cost_of_equity = 1 - ed.get_retention_ratio(equity_code, report_period)
+    
+    rrr_from_wacc = (total_equity / total_asset) * cost_of_equity + (total_debt / total_asset) * cost_of_debt * (1 - tax_rate)
+    
+    logger.debug('rrr_from_wacc=%s', rrr_from_wacc)
+    
+    return rrr_from_wacc
     

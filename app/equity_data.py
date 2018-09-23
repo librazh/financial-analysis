@@ -34,20 +34,6 @@ def get_net_income(equity_code, report_period):
     return net_income
 
 
-def get_total_asset(equity_code, report_period):
-    equity_data = pro.balancesheet(ts_code=equity_code, period=report_period)
-    total_asset = equity_data['total_assets'][0]
-    logger.debug('total_asset=%s', total_asset)
-    return total_asset
-
-
-def get_total_equity(equity_code, report_period):
-    equity_data = pro.balancesheet(ts_code=equity_code, period=report_period)
-    total_equity = equity_data['total_hldr_eqy_inc_min_int'][0]
-    logger.debug('total_equity=%s', total_equity)
-    return total_equity
-
-
 def get_retained_earning(equity_code, report_period):
     equity_data = pro.balancesheet(ts_code=equity_code, period=report_period)
     retained_earning = equity_data['undistr_porfit'][0]
@@ -94,6 +80,31 @@ def get_retention_ratio_from_balance_sheet(equity_code, report_period):
     logger.debug('retention_ratio=%s', retention_ratio)
     return retention_ratio
 
-   
-if __name__ == '__main__':
-    print(get_dividend_per_share('000876.SZ', '20171231'))
+def get_total_debt(equity_code, report_period):
+    
+    logger.debug('equity_code=%s, report_period=%s', equity_code, report_period)
+    df = pro.balancesheet(ts_code=equity_code, period=report_period)
+    total_debt = df['total_liab'][0]
+    logger.debug('total_debt=%f', total_debt)
+    return total_debt
+
+def get_total_equity(equity_code, report_period):
+    logger.debug('equity_code=%s, report_period=%s', equity_code, report_period)
+    df = pro.balancesheet(ts_code=equity_code, period=report_period)
+    total_equity = df['total_hldr_eqy_inc_min_int'][0]
+    logger.debug('total_equity=%f', total_equity)
+    return total_equity
+      
+def get_total_asset(equity_code, report_period):
+    logger.debug('equity_code=%s, report_period=%s', equity_code, report_period)
+    df = pro.balancesheet(ts_code=equity_code, period=report_period)
+    total_asset = df['total_assets'][0]
+    logger.debug('total_asset=%f', total_asset)
+    return total_asset
+
+def get_tax_payable(equity_code, report_period):
+    logger.debug('equity_code=%s, report_period=%s', equity_code, report_period)
+    df = pro.balancesheet(ts_code=equity_code, period=report_period)
+    tax_payable = df['taxes_payable'][0]
+    logger.debug('tax_payable=%f', tax_payable)
+    return tax_payable
