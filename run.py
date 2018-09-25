@@ -5,7 +5,7 @@ Created on 2018-09-16
 @author: Basel
 '''
 
-from app import equity_valuator as ev
+from app import stock_valuator as ev
 from app import fx_data as fx
 import matplotlib.pyplot as plt
 from app.my_tushare import get_tushare

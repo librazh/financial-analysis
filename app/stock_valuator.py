@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from . import equity_data as ed
+from . import stock_data as ed
 from . import macro_data as md
 
 from .my_logging import get_logger

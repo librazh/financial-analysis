@@ -5,7 +5,7 @@ Created on 2018-09-08
 @author: Basel
 '''
 import unittest
-import app.equity_data as ed
+import app.stock_data as ed
 
 class TestEquityData(unittest.TestCase):
 

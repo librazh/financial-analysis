@@ -5,7 +5,7 @@ Created on 2018-09-23
 @author: Basel
 '''
 import unittest
-import app.equity_valuator as ev
+import app.stock_valuator as ev
 
 
 class TestEquityValuator(unittest.TestCase):
